@@ -44,7 +44,7 @@
     "prepare": "husky",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "changeset publish --provenance",
+    "release": "changeset publish",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:types": "tsd && echo \"All type tests passed\"",
