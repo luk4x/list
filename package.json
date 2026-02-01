@@ -25,6 +25,7 @@
     "dist",
     "templates",
     "index.d.ts",
+    "CHANGELOG.md",
     "README.md",
     "LICENSE"
   ],
@@ -40,16 +41,18 @@
     "url": "git+https://github.com/luk4x/list.git"
   },
   "scripts": {
+    "prepare": "husky",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish --provenance",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:types": "tsd && echo \"All type tests passed\"",
     "test:all": "pnpm test && pnpm test:types",
     "typecheck": "tsc",
     "lint": "eslint .",
-    "prepare": "husky",
     "dev": "pnpm run build && node ./dist/cli.mjs",
-    "build": "tsup",
-    "prepublishOnly": "pnpm build"
+    "build": "tsup"
   },
   "tsd": {
     "directory": "tests/type-tests"
