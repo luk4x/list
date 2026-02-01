@@ -1,0 +1,72 @@
+{
+  "name": "@luk4x/list",
+  "version": "0.1.0",
+  "description": "A tiny, type-safe React component focused on improving DX when rendering lists",
+  "license": "MIT",
+  "author": "Lucas Maciel Francisco <luk4x.dev@gmail.com>",
+  "keywords": [
+    "react",
+    "list",
+    "react-component",
+    "react-list",
+    "type-safe",
+    "headless",
+    "developer experience",
+    "dx",
+    "key",
+    "inference",
+    "ui",
+    "map",
+    "frontend"
+  ],
+  "type": "module",
+  "files": [
+    "dist",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "luk4x-list": "./dist/cli.mjs"
+  },
+  "homepage": "https://github.com/luk4x/list#readme",
+  "bugs": {
+    "url": "https://github.com/luk4x/list/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luk4x/list.git"
+  },
+  "scripts": {
+    "typecheck": "tsc",
+    "lint": "eslint .",
+    "prepare": "husky",
+    "dev": "pnpm run build && node ./dist/cli.mjs",
+    "build": "tsup",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "tsup": "^8.5.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-de-morgan": "^1.3.1",
+    "typescript-eslint": "^8.54.0",
+    "@commitlint/cli": "^20.4.0",
+    "@commitlint/config-conventional": "^20.4.0",
+    "@commitlint/types": "^20.4.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "@types/react": "^18",
+    "react": "^18",
+    "@types/node": "^18"
+  },
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=18"
+  }
+}
