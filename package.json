@@ -20,9 +20,11 @@
     "frontend"
   ],
   "type": "module",
+  "types": "index.d.ts",
   "files": [
     "dist",
     "templates",
+    "index.d.ts",
     "README.md",
     "LICENSE"
   ],
@@ -38,12 +40,19 @@
     "url": "git+https://github.com/luk4x/list.git"
   },
   "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:types": "tsd && echo \"All type tests passed\"",
+    "test:all": "pnpm test && pnpm test:types",
     "typecheck": "tsc",
     "lint": "eslint .",
     "prepare": "husky",
     "dev": "pnpm run build && node ./dist/cli.mjs",
     "build": "tsup",
     "prepublishOnly": "pnpm build"
+  },
+  "tsd": {
+    "directory": "tests/type-tests"
   },
   "dependencies": {
     "@clack/prompts": "^1.0.0"
@@ -58,6 +67,9 @@
     "@commitlint/cli": "^20.4.0",
     "@commitlint/config-conventional": "^20.4.0",
     "@commitlint/types": "^20.4.0",
+    "tsd": "^0.33.0",
+    "vitest": "^3.2.4",
+    "vite": "^6.3.5",
     "husky": "^9.1.7",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3",

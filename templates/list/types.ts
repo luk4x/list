@@ -129,9 +129,17 @@ function hasValidId(item: unknown): item is TItemWithValidId {
   return isValidKey(item.id);
 }
 
+function defaultKeyExtractor<GItem>(item: GItem, index: number): Key {
+  if (isValidKey(item)) return item;
+  if (hasValidId(item)) return item.id;
+
+  throw new Error(
+    `[List] Missing keyExtractor. keyExtractor is required when items are not valid as React.Key or objects do not have a stable { id: React.Key } property. Error on items[${index}].`,
+  );
+}
+
 export {
-  hasValidId,
-  isValidKey,
+  defaultKeyExtractor,
   type TListElement,
   type TListProps,
   type TListRef,

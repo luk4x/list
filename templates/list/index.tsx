@@ -1,7 +1,6 @@
 import {
   type ForwardedRef,
   Fragment,
-  type Key,
   type ReactNode,
   type Ref,
   createElement,
@@ -12,18 +11,8 @@ import {
   type TListElement,
   type TListProps,
   type TListRef,
-  hasValidId,
-  isValidKey,
+  defaultKeyExtractor,
 } from './types';
-
-function defaultKeyExtractor<GItem>(item: GItem, index: number): Key {
-  if (isValidKey(item)) return item;
-  if (hasValidId(item)) return item.id;
-
-  throw new Error(
-    `[List] Missing keyExtractor. keyExtractor is required when items are not valid as React.Key or objects do not have a stable { id: React.Key } property. Error on items[${index}].`,
-  );
-}
 
 function _List<GItem, GElement extends TListElement = 'ul'>(
   {
