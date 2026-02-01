@@ -1,6 +1,6 @@
 {
   "name": "@luk4x/list",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tiny, type-safe React component focused on improving DX when rendering lists",
   "license": "MIT",
   "author": "Lucas Maciel Francisco <luk4x.dev@gmail.com>",
