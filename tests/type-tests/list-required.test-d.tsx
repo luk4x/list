@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { expectError, expectType } from 'tsd';
 import { List } from '../../templates/list';
 

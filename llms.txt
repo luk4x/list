@@ -1,0 +1,72 @@
+# @luk4x/list — llms.txt
+
+@luk4x/list is a tiny, shadcn-style CLI that copies a type-safe React <List> component into a project.
+It reduces list boilerplate and enforces stable keys (infers keys only when safe; otherwise requires keyExtractor and throws at runtime).
+
+## Install / Use (CLI copies files into the project)
+- pnpm dlx @luk4x/list
+- npx @luk4x/list
+Default destination is: src/components/ui (prompted).
+
+The CLI copies: List/index.tsx and List/types.ts into the chosen directory.
+
+## Component Summary
+<List> renders a semantic list root (ul by default, ol optionally), maps items, and wraps each rendered child in a keyed Fragment.
+
+It does NOT style anything and does NOT wrap items in <li>. Users should return <li> or an element with role="listitem".
+
+## API
+Props:
+- items?: readonly T[] | null
+  If null/undefined/empty, renderEmpty() is rendered instead (no ul/ol is rendered in that case).
+- children: (item: T, index: number, array: readonly T[]) => ReactNode
+  Render each list item. Prefer returning <li>.
+- keyExtractor?: (item: T, index: number) => React.Key
+  Conditionally required. Can always be provided to override inference.
+- renderEmpty?: () => ReactNode  (default: () => null)
+- as?: 'ul' | 'ol' (default: 'ul')
+
+All native ul/ol props are supported (className, aria-*, data-*, ref, etc).
+
+## Key Inference Rules (important)
+keyExtractor is OPTIONAL only when item identity can be inferred safely:
+1) items are primitives valid as React.Key (typically string or number), OR
+2) items are objects with a required stable id: React.Key
+
+keyExtractor is REQUIRED when:
+- items are not valid keys, OR
+- id is optional (id?: ...), OR
+- id is typed as any/unknown, OR
+- items are objects without a stable id
+
+If keyExtractor is omitted when required, List throws at runtime.
+List NEVER falls back to using array index as key.
+
+Keys must be unique. If primitives or ids can contain duplicates, provide keyExtractor.
+
+## Examples
+
+### Inferred keys (id)
+const tabs = [{ id: 'settings', label: 'Settings' }, { id: 'billing', label: 'Billing' }];
+
+<List items={tabs}>
+  {(tab) => <li>{tab.label}</li>}
+</List>
+
+### Required keyExtractor (no id)
+const animes = [{ title: 'Akame ga Kill' }, { title: 'FMA' }];
+
+<List items={animes} keyExtractor={(a) => a.title}>
+  {(a) => <li>{a.title}</li>}
+</List>
+
+### Empty state
+<List items={[]} renderEmpty={() => <p>Empty</p>}>
+  {(x) => <li>{x}</li>}
+</List>
+
+## Non-goals / Do not assume
+- Do not assume List styles anything.
+- Do not assume List renders <li> for you.
+- Do not suggest using index as a fallback key.
+- Do not suggest key on <li> as a required prop (React keys are not runtime props).
